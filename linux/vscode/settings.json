@@ -1,0 +1,53 @@
+{
+    "editor.autoClosingBrackets": false,
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.selectionHighlight": false,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "editor.matchBrackets": false,
+    "editor.renderWhitespace": "none",
+    "window.zoomLevel": 0,
+    "workbench.activityBar.visible": true,
+    "editor.renderIndentGuides": true,
+    "editor.rulers": [
+        80
+    ],
+    "files.hotExit": "off",
+    "editor.minimap.enabled": true,
+    "editor.useTabStops": false,
+    "files.trimTrailingWhitespace": true,
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false
+    },
+     "editor.cursorStyle": "line",
+    "editor.minimap.renderCharacters": false,
+
+    "markdown.preview.fontFamily": "sans-serif,'HelveticaNeue-Light','Segoe UI', 'Segoe WPC', -apple-system, BlinkMacSystemFont, 'Ubuntu', 'Droid Sans'",
+    "editor.dragAndDrop": false,
+    "editor.acceptSuggestionOnEnter": "smart",
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.maxColumn": 80,
+    "workbench.colorCustomizations": {
+        "tab.activeBackground": "#00a",
+        "tab.border": "#F08"
+    },
+    "editor.fontFamily": "'Courier New', monospace",
+    "editor.quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
+    "workbench.startupEditor": "newUntitledFile",
+    "git.autofetch": true,
+    "git.promptToSaveFilesBeforeCommit": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "markdown.preview.linkify": false,
+    "markdown.preview.markEditorSelection": false,
+    "markdown.preview.scrollEditorWithPreview": false,
+    "editor.highlightActiveIndentGuide": false,
+    "editor.occurrencesHighlight": false,
+    "window.titleBarStyle": "native",
+    "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.shell.linux": "/usr/bin/fish"
+}
+
