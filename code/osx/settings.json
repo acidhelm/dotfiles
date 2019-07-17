@@ -1,0 +1,71 @@
+{
+    "editor.autoClosingBrackets": "never",
+    "editor.acceptSuggestionOnCommitCharacter": false,
+    "editor.selectionHighlight": false,
+    "telemetry.enableTelemetry": false,
+    "telemetry.enableCrashReporter": false,
+    "editor.matchBrackets": false,
+    "editor.renderWhitespace": "none",
+    "window.zoomLevel": 0,
+    "workbench.activityBar.visible": true,
+    "editor.renderIndentGuides": true,
+    "editor.rulers": [
+        80,110
+    ],
+    "files.hotExit": "off",
+    "editor.minimap.enabled": true,
+    "editor.useTabStops": false,
+    "files.trimTrailingWhitespace": true,
+    "[markdown]": {
+        "files.trimTrailingWhitespace": false
+    },
+     "editor.cursorStyle": "line",
+    "editor.minimap.renderCharacters": false,
+    "editor.dragAndDrop": false,
+    "editor.acceptSuggestionOnEnter": "smart",
+    "editor.minimap.showSlider": "always",
+    "editor.minimap.maxColumn": 80,
+    "workbench.colorCustomizations": {
+        "tab.activeBackground": "#00a",
+        "tab.border": "#F08"
+    },
+    "editor.quickSuggestions": {
+        "other": false,
+        "comments": false,
+        "strings": false
+    },
+    "workbench.startupEditor": "newUntitledFile",
+    "git.autofetch": true,
+    "git.promptToSaveFilesBeforeCommit": true,
+    "diffEditor.ignoreTrimWhitespace": true,
+    "markdown.preview.linkify": false,
+    "markdown.preview.markEditorSelection": false,
+    "markdown.preview.scrollEditorWithPreview": false,
+    "editor.highlightActiveIndentGuide": false,
+    "editor.occurrencesHighlight": false,
+    "window.titleBarStyle": "native",
+    "terminal.integrated.rendererType": "dom",
+    "terminal.integrated.shell.osx": "/usr/local/bin/fish",
+    "ruby.intellisense": "rubyLocate",
+    "ruby.useLanguageServer": true,
+    "ruby.codeCompletion": "rcodetools",
+    "editor.fontSize": 13,
+    "editor.autoClosingQuotes": "never",
+    "search.usePCRE2": true,
+    "files.associations": {
+        "*.axlsx": "ruby"
+    },
+    "breadcrumbs.enabled": false,
+    "editor.tabSize": 2,
+    "html.format.indentHandlebars": true,
+    "html.format.indentInnerHtml": true,
+    "editor.detectIndentation": false,
+    "editor.renderControlCharacters": false,
+    "workbench.tree.indent": 15,
+    "workbench.tree.renderIndentGuides": "always",
+    "workbench.list.horizontalScrolling": true,
+    "gitlens.hovers.currentLine.over": "line",
+    "gitlens.currentLine.enabled": false,
+    "workbench.enableExperiments": false,
+    "typescript.disableAutomaticTypeAcquisition": true
+}
