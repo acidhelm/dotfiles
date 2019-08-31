@@ -5,7 +5,7 @@ IRB.conf[:SAVE_HISTORY] = 1000
 
 class Object
   def sm; methods.sort; end
-  def gm(m); puts sm.grep(m); end
+  def gm(m = nil); m ? sm.grep(m) : sm; end
   def ppa; pp attributes.sort.to_h; 0; end
 end
 
@@ -16,4 +16,4 @@ colors =
     result_prompt: [ :white, :bright, :red ],
   }
 
-FancyIrb.start colorize: colors
+FancyIrb.start(rocket_mode: false, colorize: colors)
