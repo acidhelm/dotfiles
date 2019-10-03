@@ -4,10 +4,16 @@ IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
 
 class Object
-  def sm; methods.sort; end
-  def gm(m = nil); m ? sm.grep(m) : sm; end
-  def psm; puts sm; end
-  def pgm(m = nil); puts gm(m); end
+  # sm = Sort methods, optionally filtering the names using a pattern.
+  def sm(pattern = nil)
+    sorted_methods = methods.sort
+    pattern ? sorted_methods.grep(pattern) : sorted_methods
+  end
+
+  # psm = puts sm
+  def psm(pattern = nil)
+    puts sm(pattern)
+  end
 end
 
 class ApplicationRecord
