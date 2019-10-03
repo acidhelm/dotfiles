@@ -17,7 +17,13 @@ class Object
 end
 
 class ApplicationRecord
-  def ppa; pp attributes.sort.to_h; 0; end
+  # ppa = pretty-print attributes, optionally filtering the names using a pattern.
+  def ppa(pattern = nil)
+    attrs = attributes.sort
+    attrs.select! { |k, v| k =~ pattern } if pattern
+    pp attrs.to_h
+    0 # Discard the return value from pp, which is the hash.
+  end
 end
 
 colors =
