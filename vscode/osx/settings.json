@@ -67,5 +67,14 @@
     "gitlens.hovers.currentLine.over": "line",
     "gitlens.currentLine.enabled": false,
     "workbench.enableExperiments": false,
-    "typescript.disableAutomaticTypeAcquisition": true
+    "typescript.disableAutomaticTypeAcquisition": true,
+    "gitlens.hovers.currentLine.enabled": false,
+    "workbench.editor.enablePreviewFromQuickOpen": false,
+    "files.insertFinalNewline": true,
+    "editor.cursorSurroundingLines": 2,
+    "terminal.integrated.cursorBlinking": true,
+    "terminal.integrated.cursorStyle": "line",
+    "bracketPairColorizer.showBracketsInGutter": true,
+    "bracketPairColorizer.highlightActiveScope": true,
+    "bracketPairColorizer.showHorizontalScopeLine": false
 }
