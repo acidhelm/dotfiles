@@ -36,8 +36,7 @@ FILTER_METHODS_SUFFIXES = /_(?:
 class Object
   # sm = Sort methods, optionally filtering the names using a pattern.
   def sm(pattern = nil)
-    sorted_methods = methods.sort
-    pattern ? sorted_methods.grep(pattern) : sorted_methods
+    (pattern ? methods.grep(pattern) : methods).sort
   end
 
   # psm = puts sm
@@ -50,16 +49,16 @@ class ApplicationRecord
   # An overridden `sm` that doesn't show various `ActiveRecord` methods that we
   # usually don't care about.
   def sm(pattern = nil)
-    super(pattern).reject do |m|
+    super.reject do |m|
       m =~ FILTER_METHODS_PREFIXES || m =~ FILTER_METHODS_SUFFIXES
     end
   end
 
   # ppa = pretty-print attributes, optionally filtering the names using a pattern.
   def ppa(pattern = nil)
-    attrs = attributes.sort
-    attrs.select! { |k, v| k =~ pattern } if pattern
-    pp attrs.to_h
+    attrs = attributes
+    attrs.select! { |k, _| k =~ pattern } if pattern
+    pp attrs.sort.to_h
     0 # Discard the return value from pp, which is the hash.
   end
 end
