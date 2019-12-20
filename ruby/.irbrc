@@ -3,20 +3,17 @@ require 'fancy_irb'
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
 
-FILTER_METHODS_PREFIXES = /\A(?:
-  \W |
-  __?\w |
-  after_add_for_ |
-  after_remove_for_ |
-  autosave_associated_records_for_ |
-  before_add_for_ |
-  before_remove_for_ |
-  restore_ |
-  saved_change_to_ |
-  validate_associated_records_for_ |
-  will_save_change_to_
-  )
-  /x
+FILTER_METHODS_PREFIXES = /\A(?:\W|__?\w|(?:
+  after_add_for |
+  after_remove_for |
+  autosave_associated_records_for |
+  before_add_for |
+  before_remove_for |
+  restore |
+  saved_change_to |
+  validate_associated_records_for |
+  will_save_change_to
+  )_)/x
 
 FILTER_METHODS_SUFFIXES = /_(?:
   before_last_save |
