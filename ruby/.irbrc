@@ -42,7 +42,7 @@ class Object
   end
 end
 
-class ApplicationRecord
+class ActiveRecord::Base
   # An overridden `sm` that doesn't show various `ActiveRecord` methods that we
   # usually don't care about.
   def sm(pattern = nil)
@@ -58,13 +58,15 @@ class ApplicationRecord
     pp attrs.sort.to_h
     0 # Discard the return value from pp, which is the hash.
   end
-end
+end if defined? ActiveRecord
+
+def r!; reload!; end if defined? Rails
 
 colors =
   {
     input_prompt: %i(white bright blue),
     rocket_prompt: %i(white bright red),
-    result_prompt: %i(white bright red),
+    result_prompt: %i(white bright red)
   }
 
 FancyIrb.start(rocket_mode: false, colorize: colors)
