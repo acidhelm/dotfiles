@@ -76,5 +76,16 @@
     "terminal.integrated.cursorStyle": "line",
     "bracketPairColorizer.showBracketsInGutter": true,
     "bracketPairColorizer.highlightActiveScope": true,
-    "bracketPairColorizer.showHorizontalScopeLine": false
+    "bracketPairColorizer.showHorizontalScopeLine": false,
+    "search.searchOnType": false,
+    "html.mirrorCursorOnMatchingTag": false,
+    "eslint.run": "onSave",
+    "workbench.editor.untitled.labelFormat": "name",
+    "timeline.showView": true,
+    "html.autoClosingTags": false,
+    "javascript.suggestionActions.enabled": false,
+    "typescript.suggestionActions.enabled": false,
+    "typescript.surveys.enabled": false,
+    "typescript.suggest.enabled": false,
+    "search.quickOpen.history.filterSortOrder": "recency"
 }
