@@ -67,7 +67,7 @@
     },
     {
         "key": "cmd+x",
-        "command": "-editor.action.clipboardCutAction",
+        "command": "editor.action.clipboardCutAction",
         "when": "textInputFocus && !editorReadonly"
     },
     {
@@ -82,7 +82,7 @@
     },
     {
         "key": "cmd+c",
-        "command": "-editor.action.clipboardCopyAction",
+        "command": "editor.action.clipboardCopyAction",
         "when": "textInputFocus"
     },
     {
@@ -97,7 +97,7 @@
     },
     {
         "key": "cmd+v",
-        "command": "-editor.action.clipboardPasteAction",
+        "command": "editor.action.clipboardPasteAction",
         "when": "textInputFocus && !editorReadonly"
     },
     {
@@ -128,6 +128,11 @@
         "key": "ctrl+z",
         "command": "undo",
         "when": "textInputFocus && !editorReadonly"
+    },
+    {
+      "key": "alt+backspace",
+      "command": "undo",
+      "when": "textInputFocus && !editorReadonly"
     },
     {
         "key": "cmd+z",
@@ -286,6 +291,11 @@
         "when": "textInputFocus && !editorReadonly"
     },
     {
+      "key": "alt+shift+backspace",
+      "command": "redo",
+      "when": "textInputFocus && !editorReadonly"
+  },
+    {
         "key": "shift+cmd+z",
         "command": "-redo",
         "when": "textInputFocus && !editorReadonly"
@@ -362,7 +372,44 @@
     },
     {
         "key": "numpad_subtract",
-        "command": "editor.action.deleteLines",
+        "command": "editor.action.clipboardCutAction",
         "when": "editorTextFocus && !editorReadonly"
+    },
+    {
+      "key": "ctrl+shift+t",
+      "command": "workbench.action.reopenClosedEditor"
+    },
+    {
+      "key": "shift+cmd+t",
+      "command": "-workbench.action.reopenClosedEditor"
+    },
+    {
+      "key": "ctrl+shift+alt+p",
+      "command": "workbench.action.removeFromEditorHistory"
+    },
+    {
+      "key": "ctrl+shift+8",
+      "command": "editor.action.toggleRenderWhitespace"
+    },
+    {
+      "key": "ctrl+o",
+      "command": "-lineBreakInsert",
+      "when": "textInputFocus && !editorReadonly"
+    },
+    {
+      "key": "ctrl+shift+pageup",
+      "command": "workbench.action.moveEditorLeftInGroup"
+    },
+    {
+      "key": "cmd+k shift+cmd+left",
+      "command": "-workbench.action.moveEditorLeftInGroup"
+    },
+    {
+      "key": "ctrl+shift+pagedown",
+      "command": "workbench.action.moveEditorRightInGroup"
+    },
+    {
+      "key": "cmd+k shift+cmd+right",
+      "command": "-workbench.action.moveEditorRightInGroup"
     }
 ]
