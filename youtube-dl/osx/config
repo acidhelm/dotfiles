@@ -1,0 +1,1 @@
+-R 10 --console-title -o ~/Movies/%(uploader)s-%(title)s-%(id)s.%(ext)s
