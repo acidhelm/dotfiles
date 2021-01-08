@@ -1,3 +1,4 @@
+# rubocop:disable all
 require 'irb/completion'
 require 'fancy_irb'
 IRB.conf[:AUTO_INDENT] = true
@@ -44,11 +45,25 @@ end
 
 class ActiveRecord::Base
   # An overridden `sm` that doesn't show various `ActiveRecord` methods that we
-  # usually don't care about.
-  def sm(pattern = nil)
+  # usually don't care about.  Pass `true` as the second param to see everything.
+  def sm(pattern = nil, show_all = false)
+    return super(pattern) if show_all
     super.reject do |m|
       m =~ FILTER_METHODS_PREFIXES || m =~ FILTER_METHODS_SUFFIXES
     end
+  end
+
+  def psm(pattern = nil, show_all = false)
+    puts sm(pattern, show_all)
+  end
+
+  # Convenience methods for calling `sm` or `psm` with `show_all` = true.
+  def sma(pattern = nil)
+    sm(pattern, true)
+  end
+
+  def psma(pattern = nil)
+    psm(pattern, true)
   end
 
   # ppa = pretty-print attributes, optionally filtering the names using a pattern.
