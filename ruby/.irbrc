@@ -3,6 +3,7 @@ require 'irb/completion'
 require 'fancy_irb'
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
+IRB.conf[:USE_COLORIZE] = false
 
 FILTER_METHODS_PREFIXES = /\A(?:\W|__?\w|(?:
   after_add_for |
