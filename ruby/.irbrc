@@ -1,9 +1,17 @@
 # rubocop:disable all
 require 'irb/completion'
-require 'fancy_irb'
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:USE_COLORIZE] = false
+
+prompt = IRB.conf[:PROMPT][:DEFAULT]
+"INSC".each_char do |c|
+  key = :"PROMPT_#{c}"
+  prompt[key] = "\e[44m" + prompt[key].strip + "\e[0m " # white on blue
+end
+prompt[:RETURN] = "\e[41m=> \e[0m%s\n" # white on red
+IRB.conf[:PROMPT][:ACIDHELM] = prompt
+IRB.conf[:PROMPT_MODE] = :ACIDHELM
 
 FILTER_METHODS_PREFIXES = /\A(?:\W|__?\w|(?:
   after_add_for |
@@ -77,12 +85,3 @@ class ActiveRecord::Base
 end if defined? ActiveRecord
 
 def r!; reload!; end if defined? Rails
-
-colors =
-  {
-    input_prompt: %i(white bright blue),
-    rocket_prompt: %i(white bright red),
-    result_prompt: %i(white bright red)
-  }
-
-FancyIrb.start(rocket_mode: false, colorize: colors)
