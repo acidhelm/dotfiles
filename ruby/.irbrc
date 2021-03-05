@@ -4,7 +4,7 @@ IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:USE_COLORIZE] = false
 
-prompt = IRB.conf[:PROMPT][:DEFAULT]
+prompt = IRB.conf[:PROMPT][:CLASSIC].dup
 "INSC".each_char do |c|
   key = :"PROMPT_#{c}"
   prompt[key] = "\e[44m" + prompt[key].strip + "\e[0m " # white on blue
@@ -85,3 +85,11 @@ class ActiveRecord::Base
 end if defined? ActiveRecord
 
 def r!; reload!; end if defined? Rails
+
+# Turn off ActiveRecord logging for a block of code.
+def qq
+  lvl = ActiveRecord::Base.logger.level
+  ActiveRecord::Base.logger.level = 1
+  yield
+  ActiveRecord::Base.logger.level = lvl
+end if defined? ActiveRecord
