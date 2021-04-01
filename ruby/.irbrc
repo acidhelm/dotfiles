@@ -91,5 +91,6 @@ def qq
   lvl = ActiveRecord::Base.logger.level
   ActiveRecord::Base.logger.level = 1
   yield
+ensure
   ActiveRecord::Base.logger.level = lvl
 end if defined? ActiveRecord
