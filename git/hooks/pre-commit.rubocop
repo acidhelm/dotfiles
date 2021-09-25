@@ -1,14 +1,30 @@
 #!/usr/bin/env ruby
 
-require 'english'
+require 'English'
 
-lines = `git status --porcelain=2 -z`.split("\0")
+exitstatus = 0
 
-changed_file_paths = lines.each_with_object([]) do |line, paths|
-  paths << "'#{Regexp.last_match[1]}'" if line =~ /\A1 (?:.+? ){7}(.+\.rb)\z/
+# Parse the output of git status to find files that have been modified and staged.  Example:
+# 1 M. N... 100644 100644 100644 0a0050d9e6 1fdc1a2276 app/path/to/example.rb
+# ^ ^^                                                 ^^^^^^^^^^^^^^^^^^^^^^
+# The three fields that we care about are marked.  The first column is 1 for added and modified files.
+# The second field says whether any modifications have been staged (first char) or made in the working
+# tree (second char).  The last field is the path to the file.
+
+changed_file_paths = `git status --porcelain=2 -z`.split("\0").filter_map do |line|
+  next unless line =~ /\A1 (?<index>.)(?<tree>.) (?:.+? ){6}(?<path>.+)\z/
+  index_status = Regexp.last_match[:index]
+  working_tree_status = Regexp.last_match[:tree]
+  next if index_status == '.' # No changes have been staged.
+  next if index_status == 'D' || working_tree_status == 'D' # The file was deleted.
+  Regexp.last_match[:path]
 end
 
-unless changed_file_paths.empty?
-  system("rubocop -D -E #{changed_file_paths.join(' ')}")
-  exit $CHILD_STATUS.exitstatus
+changed_ruby_paths = changed_file_paths.filter_map { |path| "'#{path}'" if path.end_with?('.rb', '.rake') }
+
+unless changed_ruby_paths.empty?
+  system("rubocop -D -E --force-exclusion #{changed_ruby_paths.join(' ')}")
+  exitstatus = $CHILD_STATUS.exitstatus
 end
+
+exit exitstatus
