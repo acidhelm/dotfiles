@@ -57,7 +57,7 @@ class ActiveRecord::Base
   # usually don't care about.  Pass `true` as the second param to see everything.
   def sm(pattern = nil, show_all = false)
     return super(pattern) if show_all
-    super.reject do |m|
+    super(pattern).reject do |m|
       m =~ FILTER_METHODS_PREFIXES || m =~ FILTER_METHODS_SUFFIXES
     end
   end
