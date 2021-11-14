@@ -32,6 +32,7 @@ FILTER_METHODS_SUFFIXES = /_(?:
   change |
   change_to_be_saved |
   changed\? |
+  for_database |
   in_database |
   previous_change |
   previously_changed\? |
