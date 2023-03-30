@@ -3,6 +3,8 @@ require 'irb/completion'
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:USE_COLORIZE] = false
+IRB.conf[:USE_AUTOCOMPLETE] = false
+IRB.conf[:INSPECT_MODE] = ->(o) { o.inspect }
 
 prompt = IRB.conf[:PROMPT][:CLASSIC].dup
 "INSC".each_char do |c|
@@ -10,10 +12,13 @@ prompt = IRB.conf[:PROMPT][:CLASSIC].dup
   prompt[key] = "\e[44m" + prompt[key].strip + "\e[0m " # white on blue
 end
 prompt[:RETURN] = "\e[41m=> \e[0m%s\n" # white on red
-IRB.conf[:PROMPT][:ACIDHELM] = prompt
-IRB.conf[:PROMPT_MODE] = :ACIDHELM
+IRB.conf[:PROMPT][:MDUNN] = prompt
+IRB.conf[:PROMPT_MODE] = :MDUNN
 
-FILTER_METHODS_PREFIXES = /\A(?:\W|__?\w|(?:
+# Filter out methods that start with \W or an underscore.  \W are operators, and a leading underscore denotes
+# an internal method.  We also filter out methods with one of these prefixes, which are `ActiveRecord`
+# methods that usually aren't useful to see.
+FILTER_METHODS_PREFIXES = /^(?:\W|_|(?:
   after_add_for |
   after_remove_for |
   autosave_associated_records_for |
@@ -25,6 +30,7 @@ FILTER_METHODS_PREFIXES = /\A(?:\W|__?\w|(?:
   will_save_change_to
   )_)/x
 
+# Filter out methods with these suffixes, which are `ActiveRecord` methods that aren't useful usually to see.
 FILTER_METHODS_SUFFIXES = /_(?:
   before_last_save |
   before_type_cast |
@@ -38,7 +44,7 @@ FILTER_METHODS_SUFFIXES = /_(?:
   previously_changed\? |
   was |
   will_change!
-  )\z
+  )$
   /x
 
 class Object
@@ -87,11 +93,8 @@ end if defined? ActiveRecord
 
 def r!; reload!; end if defined? Rails
 
-# Turn off ActiveRecord logging for a block of code.
+# Turn off SQL logging for a block of code.
 def qq
-  lvl = ActiveRecord::Base.logger.level
-  ActiveRecord::Base.logger.level = 1
-  yield
-ensure
-  ActiveRecord::Base.logger.level = lvl
+  ActiveRecord::Base.logger.silence { yield }
+  0
 end if defined? ActiveRecord
