@@ -4,7 +4,9 @@ IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:USE_COLORIZE] = false
 IRB.conf[:USE_AUTOCOMPLETE] = false
+# The next two lines unhose things that were hosed by Ruby 3.1.2.
 IRB.conf[:INSPECT_MODE] = ->(o) { o.inspect }
+Reline.autocompletion = false
 
 prompt = IRB.conf[:PROMPT][:CLASSIC].dup
 "INSC".each_char do |c|
@@ -48,39 +50,29 @@ FILTER_METHODS_SUFFIXES = /_(?:
   /x
 
 class Object
-  # sm = Sort methods, optionally filtering the names using a pattern.
-  def sm(pattern = nil)
-    (pattern ? methods.grep(pattern) : methods).sort
-  end
-
-  # psm = puts sm
-  def psm(pattern = nil)
-    puts sm(pattern)
-  end
+  # sm = Sort methods, optionally filtering the names using a pattern.  psm = puts sm
+  def sm(pattern = nil) = (pattern ? methods.grep(pattern) : methods).sort
+  def psm(pattern = nil) = puts sm(pattern)
 end
 
 class ActiveRecord::Base
   # An overridden `sm` that doesn't show various `ActiveRecord` methods that we
   # usually don't care about.  Pass `true` as the second param to see everything.
   def sm(pattern = nil, show_all = false)
-    return super(pattern) if show_all
-    super(pattern).reject do |m|
-      m =~ FILTER_METHODS_PREFIXES || m =~ FILTER_METHODS_SUFFIXES
+    if show_all
+      super(pattern)
+    else
+      super(pattern).reject do |m|
+        m =~ FILTER_METHODS_PREFIXES || m =~ FILTER_METHODS_SUFFIXES
+      end
     end
   end
 
-  def psm(pattern = nil, show_all = false)
-    puts sm(pattern, show_all)
-  end
+  def psm(pattern = nil, show_all = false) = puts sm(pattern, show_all)
 
   # Convenience methods for calling `sm` or `psm` with `show_all` = true.
-  def sma(pattern = nil)
-    sm(pattern, true)
-  end
-
-  def psma(pattern = nil)
-    psm(pattern, true)
-  end
+  def sma(pattern = nil) = sm(pattern, true)
+  def psma(pattern = nil) = psm(pattern, true)
 
   # ppa = pretty-print attributes, optionally filtering the names using a pattern.
   def ppa(pattern = nil)
@@ -91,10 +83,14 @@ class ActiveRecord::Base
   end
 end if defined? ActiveRecord
 
-def r!; reload!; end if defined? Rails
+def r! = reload! if defined? Rails
 
 # Turn off SQL logging for a block of code.
 def qq
-  ActiveRecord::Base.logger.silence { yield }
-  0
+  ret = ActiveRecord::Base.logger.silence { yield }
+  # If the block returned an array, hash, or (most likely) an AR Relation, then replace that with 0.
+  # Those data types are usually the result of calling .each or doing a query in the block, and showing
+  # results with puts.
+  ret = 0 if ret.is_a?(Array) || ret.is_a?(Hash) || ret.class.try(:ancestors)&.include?(ActiveRecord::Base)
+  ret
 end if defined? ActiveRecord
