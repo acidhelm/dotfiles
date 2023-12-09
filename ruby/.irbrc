@@ -1,5 +1,9 @@
+# frozen_string_literal: true
+
 # rubocop:disable all
 require 'irb/completion'
+require 'benchmark'
+
 IRB.conf[:AUTO_INDENT] = true
 IRB.conf[:SAVE_HISTORY] = 1000
 IRB.conf[:USE_COLORIZE] = false
@@ -11,7 +15,10 @@ Reline.autocompletion = false
 prompt = IRB.conf[:PROMPT][:CLASSIC].dup
 "INSC".each_char do |c|
   key = :"PROMPT_#{c}"
-  prompt[key] = "\e[44m" + prompt[key].strip + "\e[0m " # white on blue
+
+  if prompt[key]
+    prompt[key] = "\e[44m" + prompt[key].strip + "\e[0m " # white on blue
+  end
 end
 prompt[:RETURN] = "\e[41m=> \e[0m%s\n" # white on red
 IRB.conf[:PROMPT][:MDUNN] = prompt
@@ -50,8 +57,18 @@ FILTER_METHODS_SUFFIXES = /_(?:
   /x
 
 class Object
-  # sm = Sort methods, optionally filtering the names using a pattern.  psm = puts sm
-  def sm(pattern = nil) = (pattern ? methods.grep(pattern) : methods).sort
+  # sm = Sort methods, optionally filtering the names using a pattern.
+  def sm(pattern = nil)
+    if pattern
+      # Always ignore case for convenience.
+      pattern = Regexp.new(pattern.source, pattern.options | Regexp::IGNORECASE)
+      methods.grep(pattern).sort
+    else
+      methods.sort
+    end
+  end
+
+  # psm = puts sm
   def psm(pattern = nil) = puts sm(pattern)
 end
 
@@ -94,3 +111,12 @@ def qq
   ret = 0 if ret.is_a?(Array) || ret.is_a?(Hash) || ret.class.try(:ancestors)&.include?(ActiveRecord::Base)
   ret
 end if defined? ActiveRecord
+
+def rta(task_name)
+  Rake::load_rakefile("Rakefile")
+  Rake::Task[task_name].invoke
+end
+
+def rt(task_name) = qq { rta(task_name) }
+def apt(task_name) = rt("after_party:#{task_name}")
+def apta(task_name) = rta("after_party:#{task_name}")
