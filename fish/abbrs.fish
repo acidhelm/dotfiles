@@ -17,3 +17,5 @@ abbr -a -U -- ytd 'caffeinate yt-dlp -f "bestvideo[height<=1080]+bestaudio/best[
 abbr -a -U -- ytdf 'yt-dlp -F'
 abbr -a -U -- ytdm 'caffeinate yt-dlp -f "bestvideo[height<=1440]+bestaudio/best[height<=1440]"'
 abbr -a -U -- ytds 'caffeinate yt-dlp -f "bestvideo[height<=720]+bestaudio/best[height<=720]"'
+abbr -a -U -- ytda 'caffeinate yt-dlp -f "bestvideo[height<=1080]+bestaudio/best[height<=1080]" -a ~/a;and exit'
+abbr -a -U -- ytdma 'caffeinate yt-dlp -f "bestvideo[height<=1440]+bestaudio/best[height<=1440]" -a ~/a;and exit'
