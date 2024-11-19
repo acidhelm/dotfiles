@@ -1,1 +1,11 @@
-
+s = {
+	id = "DE1FC196-70DE-4A12-8EFF-D6387A5A0246",
+	internalName = "Fire Embarcadero",
+	title = "Fire Embarcadero",
+	type = "Metadata",
+	value = {
+		["com.adobe.keywords"] = "Embarcadero Plaza, fire, fire jam, fire spinning, flow, poi, San Francisco",
+		uuid = "C4EDF686-CF68-4F8B-A30E-F8980DBEB882",
+	},
+	version = 0,
+}
