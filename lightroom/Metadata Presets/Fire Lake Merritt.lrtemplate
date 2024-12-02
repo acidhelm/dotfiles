@@ -1,0 +1,11 @@
+s = {
+	id = "470A3B29-8AF6-4698-AE4F-8C642A526281",
+	internalName = "Fire Lake Merritt",
+	title = "Fire Lake Merritt",
+	type = "Metadata",
+	value = {
+		["com.adobe.keywords"] = "fire, fire jam, fire spinning, flow, Lake Merritt, Oakland, poi",
+		uuid = "B9C04FEF-46C5-4566-AAA1-8FED18CDBF9B",
+	},
+	version = 0,
+}
