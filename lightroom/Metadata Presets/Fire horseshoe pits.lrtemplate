@@ -1,0 +1,11 @@
+s = {
+	id = "6DFB95E9-139F-4B70-BE6E-24145DF377B3",
+	internalName = "Fire horseshoe pits",
+	title = "Fire horseshoe pits",
+	type = "Metadata",
+	value = {
+		["com.adobe.keywords"] = "horseshoe pits, fire, fire jam, fire spinning, flow, poi, San Francisco",
+		uuid = "6090AD77-9848-4ADA-81AC-850BBF3A88C2",
+	},
+	version = 0,
+}
